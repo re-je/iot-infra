@@ -19,5 +19,9 @@ jobs:
         run: black --check examples
       - name: Run Isort
         run: isort --check-only examples
-      - name: Run Tests
+      - name: Run BQ Pusher Tests
+        working-directory: examples/bq-pusher
+        run: pytest
+      - name: Run S3 Pusher Tests
+        working-directory: examples/s3-pusher
         run: pytest

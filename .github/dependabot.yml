@@ -4,15 +4,31 @@ updates:
     directory: "/examples/bq-pusher"
     schedule:
       interval: "weekly"
+    groups:
+      bq-pusher-docker:
+        patterns:
+          - "*"
   - package-ecosystem: "pip"
     directory: "/examples/bq-pusher"
     schedule:
       interval: "weekly"
+    groups:
+      bq-pusher-pip:
+        patterns:
+          - "*"
   - package-ecosystem: "docker"
     directory: "/examples/s3-pusher"
     schedule:
       interval: "weekly"
+    groups:
+      s3-pusher-docker:
+        patterns:
+          - "*"
   - package-ecosystem: "pip"
     directory: "/examples/s3-pusher"
     schedule:
       interval: "weekly"
+    groups:
+      s3-pusher-pip:
+        patterns:
+          - "*"
