@@ -56,7 +56,7 @@ async def create_item(event: Event):
     blob_name = f"application={event.application}/sender={event.device}/dt={event.time:%Y-%m-%d}/{event.id}"
     log.debug("blob name: %s", blob_name)
 
-    json_event = event.json()
+    json_event = event.model_dump_json()
     log.debug("writing event json: %s", json_event)
 
     blob = bucket.blob(blob_name)
