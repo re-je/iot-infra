@@ -1,0 +1,49 @@
+= IoT Infrastructure Design
+
+This repository documents a simple, vendor-agnostic IoT infrastructure design. It provides a reference architecture for ingesting, processing, and visualizing data from IoT devices.
+
+== Architecture Overview
+
+The design consists of the following six stages:
+
+1.  **MQTT Broker / Endpoint**
+    *   **Function**: Acts as the entry point for IoT devices, gateways, and services. Manages device connections and authentication.
+    *   **Note**: This is the exposed part of the infrastructure.
+
+2.  **Metadata Enrichment**
+    *   **Function**: Enriches the received payload with metadata (e.g., device ID, topic, timestamp) before forwarding it.
+
+3.  **Web Socket Server / Ingestion Service**
+    *   **Function**: Receives the enriched payload from the rule engine, unpacks it, and writes it to a storage destination (Data Lake).
+    *   **Implementation**: Can be a serverless function (Knative, Cloud Run) or a containerized application.
+    *   **Examples**: See `examples/bq-pusher` (BigQuery) and `examples/s3-pusher` (S3).
+
+4.  **Data Lake**
+    *   **Function**: Stores raw and structured data for long-term retention and analysis.
+    *   **Schema**: The ingestion service unpacks the JSON payload into rows/objects suitable for the destination schema.
+
+5.  **Transformation Layer**
+    *   **Function**: Transforms raw IoT data, cleans it, and combines it with other data sources to create analytics-ready datasets.
+
+6.  **BI Layer**
+    *   **Function**: Provides authenticated access to dashboards, visualizations, and insights derived from the transformed data.
+
+== Connection & Payload Details
+
+For recommended connection details and payload schemas, please refer to the link:https://github.com/re-je/messaging-onboarding[Messaging Onboarding Repository].
+
+== Production Considerations
+
+The code provided in the `examples/` directory is intended for demonstration purposes.
+
+*   **Performance & Cost**: For high-throughput production environments, consider using compiled languages (e.g., Go, Rust, C++) or highly optimized runtimes to reduce compute costs and latency.
+*   **CI/CD**: Implement robust CI/CD pipelines to automate testing, building, and deployment.
+*   **Dependency Management**: Use tools like Dependabot (configured in this repo) to keep dependencies up to date and secure.
+*   **Security**: Ensure strict IAM policies, network isolation, and secret management are in place.
+
+== Example Code
+
+This repository contains example implementations for the "Web Socket Server" component:
+
+*   `examples/bq-pusher`: A FastAPI service that ingests data into Google BigQuery.
+*   `examples/s3-pusher`: A FastAPI service that saves data to AWS S3 (or compatible storage).

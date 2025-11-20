@@ -1,0 +1,23 @@
+name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r examples/bq-pusher/requirements.txt
+          pip install -r examples/s3-pusher/requirements.txt
+          pip install pytest black isort httpx
+      - name: Run Black
+        run: black --check examples
+      - name: Run Isort
+        run: isort --check-only examples
+      - name: Run Tests
+        run: pytest
