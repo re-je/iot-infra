@@ -9,8 +9,13 @@ os.environ["API_KEY"] = "test-key"
 os.environ["PROJECT_ID"] = "test-project"
 os.environ["BUCKET"] = "test-bucket"
 
+import sys
+
 from fastapi.testclient import TestClient
-from main import app
+
+# Mock storage before importing main to avoid credential errors
+with patch.dict(sys.modules, {"google.cloud.storage": MagicMock()}):
+    from main import app
 
 client = TestClient(app)
 

@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import datetime
 from unittest.mock import MagicMock, patch
 
@@ -10,7 +11,10 @@ os.environ["PROJECT_ID"] = "test-project"
 os.environ["TABLE"] = "test-table"
 
 from fastapi.testclient import TestClient
-from main import Event, app
+
+# Mock bigquery before importing main to avoid credential errors
+with patch.dict(sys.modules, {"google.cloud.bigquery": MagicMock()}):
+    from main import Event, app
 
 client = TestClient(app)
 
