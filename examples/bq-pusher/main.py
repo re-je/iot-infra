@@ -4,7 +4,7 @@ import logging as log
 import os
 import sys
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
 from fastapi import FastAPI, HTTPException, Response, Security, status
 from fastapi.security import APIKeyHeader
@@ -55,8 +55,8 @@ async def create_item(event: Event, response: Response):
     for key, point_data in event.points.items():
         # point_data is expected to be a dict with "present_value"
         if not isinstance(point_data, dict) or "present_value" not in point_data:
-             log.warning("Invalid point data for key %s: %s", key, point_data)
-             continue
+            log.warning("Invalid point data for key %s: %s", key, point_data)
+            continue
 
         present_value = point_data["present_value"]
         try:
