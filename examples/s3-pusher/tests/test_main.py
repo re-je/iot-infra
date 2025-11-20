@@ -13,8 +13,8 @@ import sys
 
 from fastapi.testclient import TestClient
 
-# Mock storage before importing main to avoid credential errors
-with patch.dict(sys.modules, {"google.cloud.storage": MagicMock()}):
+# Mock google.auth.default before importing main to avoid credential errors
+with patch("google.auth.default", return_value=(MagicMock(), "test-project")):
     from main import app
 
 client = TestClient(app)

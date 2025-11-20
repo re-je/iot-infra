@@ -12,8 +12,8 @@ os.environ["TABLE"] = "test-table"
 
 from fastapi.testclient import TestClient
 
-# Mock bigquery before importing main to avoid credential errors
-with patch.dict(sys.modules, {"google.cloud.bigquery": MagicMock()}):
+# Mock google.auth.default before importing main to avoid credential errors
+with patch("google.auth.default", return_value=(MagicMock(), "test-project")):
     from main import Event, app
 
 client = TestClient(app)
