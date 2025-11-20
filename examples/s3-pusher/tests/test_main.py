@@ -14,7 +14,10 @@ import sys
 from fastapi.testclient import TestClient
 
 # Mock google.auth.default before importing main to avoid credential errors
-with patch("google.auth.default", return_value=(MagicMock(), "test-project")):
+with patch(
+    "google.auth.default",
+    return_value=(MagicMock(universe_domain="googleapis.com"), "test-project"),
+):
     from main import app
 
 client = TestClient(app)
