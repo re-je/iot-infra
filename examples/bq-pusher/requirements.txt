@@ -1,3 +1,3 @@
-fastapi==0.127.0
-google-cloud-bigquery==3.39.0
+fastapi==0.128.0
+google-cloud-bigquery==3.40.0
 uvicorn==0.40.0
