@@ -40,8 +40,8 @@ app = FastAPI()
 class Event(BaseModel):
     specversion: Optional[str] = "1.0"
     id: str
-    source: Optional[str] = "https://emqx.io/endpoint"
-    type: Optional[str] = "io.emqx.iot.message"
+    source: Optional[str] = "https://re.je/endpoint"
+    type: Optional[str] = "je.re.iot.message"
     datacontenttype: Optional[str] = "application/json"
     subject: str
     time: datetime = Field(alias="timestamp")
