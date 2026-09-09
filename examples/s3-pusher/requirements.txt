@@ -1,4 +1,4 @@
-google-cloud-storage==3.9.0
-fastapi==0.131.0
-uvicorn==0.41.0
-pydantic==2.12.5
+google-cloud-storage==3.12.1
+fastapi==0.139.0
+uvicorn==0.51.0
+pydantic==2.13.4
