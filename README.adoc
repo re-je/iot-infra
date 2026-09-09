@@ -1,5 +1,12 @@
 = IoT Infrastructure Design
 
+[IMPORTANT]
+====
+*This repository is archived.* It is no longer maintained and is kept for reference only.
+
+For our latest IoT products, please get in touch: https://re.je[re.je].
+====
+
 This repository documents a simple, vendor-agnostic IoT infrastructure design. It provides a reference architecture for ingesting, processing, and visualizing data from IoT devices.
 
 == Architecture Overview
